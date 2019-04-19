@@ -1,0 +1,236 @@
+﻿@model CoreEcommerceUserPanal.Models.Customers
+@using Microsoft.Extensions.Options
+@inject IOptions<StripeSettings> Stripe
+@{
+    ViewData["Title"] = "Checkout";
+    Layout = "~/Views/Shared/_UserLayout.cshtml";
+}
+<style>
+
+    .tb {
+        margin-left: 800px;
+        margin-top: -950px;
+    }
+</style>
+<script type="text/javascript">
+    function auto_fill_address() {
+        var same_addr = document.getElementById("same_residential_permanent").checked;
+        var resaddr = document.getElementById("residential_address").value;
+        var resphone = document.getElementById("residential_phone").value;
+        var rescountry = document.getElementById("residential_country").value;
+        var resstate = document.getElementById("residential_state").value;
+        var respin = document.getElementById("residential_zip").value;
+
+        //alert(x);
+        if (same_addr) {
+            if ((resaddr == '' || resaddr == null) || (respin == '' || respin == null) || (resphone == '' || resphone == null) || (rescountry == '' || rescountry == null)
+                || (resstate == '' || resstate == null)) {
+                alert('please fill address and pincode');
+                document.getElementById("same_residential_permanent").checked = false;
+            } else {
+                document.getElementById("permanent_address").value = resaddr;
+                document.getElementById("permanent_phone").value = resphone;
+                document.getElementById("permanent_country").value = rescountry;
+                document.getElementById("permanent_state").value = resstate;
+                document.getElementById("permanent_pincode").value = respin;
+
+            }
+        }
+        else {
+            document.getElementById("permanent_address").value = '';
+            document.getElementById("permanent_phone").value = '';
+            document.getElementById("permanent_pincode").value = '';
+            document.getElementById("permanent_country").value = '';
+            document.getElementById("permanent_state").value = '';
+
+        }
+    }
+</script>
+<!-- Start Banner Area -->
+<section class="banner-area organic-breadcrumb">
+    <div class="container">
+        <div class="breadcrumb-banner d-flex flex-wrap align-items-center justify-content-end">
+            <div class="col-first">
+                <h1>Checkout</h1>
+
+            </div>
+        </div>
+    </div>
+</section>
+<!-- End Banner Area -->
+<!--================Checkout Area =================-->
+<section class="checkout_area section_gap">
+    <div class="container">
+        <div class="returning_customer">
+            <div class="check_title">
+                <h2>Returning Customer? <a asp-action="Login" asp-controller="Customers">Click here to login</a></h2>
+            </div>
+            <p>
+                If you have shopped with us before, please enter your details in the boxes below. If you are a new
+                customer, please proceed to the Billing & Shipping section.
+            </p>
+            <form class="row contact_form" method="post" asp-controller="Customers" asp-action="Login" id="contactForm" novalidate="novalidate">
+                <div class="col-md-6 form-group p_star">
+                    <input type="text" class="form-control" id="name" name="name">
+                    <span class="placeholder" data-placeholder="Username or Email"></span>
+                </div>
+                <div class="col-md-6 form-group p_star">
+                    <input type="password" class="form-control" id="password" name="password">
+                    <span class="placeholder" data-placeholder="Password"></span>
+                </div>
+                <div class="col-md-12 form-group">
+                    <button type="submit" value="submit" class="primary-btn" asp-action="Login" asp-controller="Customers">login</button>
+
+                </div>
+            </form>
+        </div>
+        <div class="billing_details">
+            <div class="row">
+                <div class="col-lg-8">
+                    <h3>Billing Details</h3>
+                    <form class="row contact_form" name="myform" novalidate="novalidate">
+                        <div class="col-md-6 form-group p_star">
+                            <input asp-for="FirstName" type="text" class="form-control" id="firstName" placeholder="" value="@ViewBag.cus.FirstName" required>
+                            <div class="invalid-feedback">
+                                Valid first name is required.
+                            </div>
+                        </div>
+                        <div class="col-md-6 form-group p_star">
+                            <input asp-for="LastName" type="text" class="form-control" id="lastName" placeholder="" value="@ViewBag.cus.LastName" required>
+                        </div>
+                        <div class="col-md-12 form-group">
+                            <div class="input-group-prepend">
+                            </div>
+                            <input asp-for="UserName" type="text" class="form-control" id="username" placeholder="Username" value="@ViewBag.cus.UserName" required>
+                            <div class="invalid-feedback" style="width: 100%">
+                                Your username is required.
+                            </div>
+                        </div>
+                        <div class="col-md-6 form-group p_star">
+                            <input asp-for="Gender" required type="text" class="form-control" id="Gender" value="@ViewBag.cus.Gender">
+                        </div>
+                        <div class="col-md-6 form-group p_star">
+                            <input asp-for="EmailId" required type="email" class="form-control" id="email" placeholder="you@example.com" value="@ViewBag.cus.EmailId">
+                        </div>
+
+                        <div class="col-md-12 form-group p_star">
+                            <input asp-for="Address" type="text" class="form-control" id="residential_address" placeholder="1234 Main St" value="@ViewBag.cus.Address" required>
+                        </div>
+                        <div class="col-md-12 form-group p_star">
+                            <input asp-for="PhoneNo" type="number" class="form-control" id="residential_phone" placeholder="Phone Number" value="@ViewBag.cus.PhoneNo" required>
+                        </div>
+                        <div class="col-md-12 form-group p_star">
+                            <input asp-for="Country" id="residential_country" class="form-control" type="text" value="@ViewBag.cus.Country" required>
+                        </div>
+                        <div class="col-md-12 form-group p_star">
+                            <input asp-for="State" id="residential_state" class="form-control" type="text" value="@ViewBag.cus.State" required>
+                        </div>
+                        <div class="col-md-12 form-group">
+                            <input asp-for="Zip" type="number" class="form-control" id="residential_zip" placeholder="Zip" value="@ViewBag.cus.Zip" required>
+                        </div>
+                        <div class="custom-control custom-checkbox">
+                            <input asp-for="ShippingAddress" type="checkbox" id="same_residential_permanent" onclick="auto_fill_address();">
+                            <label asp-for="ShippingAddress" for="same_residential_permanent">Shipping address is the same as my billing address</label>
+                        </div>
+                        <br />
+                        <br />
+                        <div class="col-md-12 form-group p_star">
+                            <input asp-for="Address" type="text" class="form-control" id="permanent_address" placeholder="1234 Main St" required>
+                        </div>
+                        <div class="col-md-12 form-group p_star">
+                            <input asp-for="PhoneNo" type="number" class="form-control" id="permanent_phone" placeholder="Phone Number" required>
+                        </div>
+                        <div class="col-md-12 form-group p_star">
+                            <input asp-for="Country" type="text" class="form-control" id="permanent_country" placeholder="Country" required>
+                        </div>
+                        <div class="col-md-12 form-group p_star">
+                            <input asp-for="State" type="text" class="form-control" id="permanent_state" placeholder="State" required>
+                        </div>
+                        <div class="col-md-12 form-group">
+                            <input asp-for="Zip" type="number" class="form-control" id="permanent_pincode" placeholder="Zip" required>
+                        </div>
+
+
+                        <script src="//checkout.stripe.com/v2/checkout.js"
+                                class="stripe-button"
+                                data-key="@Stripe.Value.PublishableKey"
+                                data-locale="auto"
+                                data-description="Sample Charge"
+                                data-amount="@ViewBag.total"
+                                onsubmit="return validateform();">
+                        </script>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+
+        @foreach (var item in ViewBag.checkout)
+        {
+            ViewBag.i++;
+        }
+        <div class="row">
+            <div class="col-md-4 order-md-8 mb-8 tb">
+                <h4 class="d-flex justify-content-between align-items-center mb-3">
+                    <span class="text-muted">Your cart</span>
+                    <span class="badge badge-secondary badge-pill">@ViewBag.i</span>
+                </h4>
+                <ul class="list-group mb-3">
+                    <li class="list-group-item d-flex justify-content-between lh-condensed">
+                        <span class="text-muted">
+                            <h6 class="my-0" style="font-weight:bold;">Product Name</h6>
+                        </span>
+                        <span class="text-muted">
+                            <h6 class="my-0" style="font-weight:bold;">Price</h6>
+                        </span>
+                        <span class="text-muted">
+                            <h6 class="my-0" style="font-weight:bold;">Quantity</h6>
+                        </span>
+                        <span class="text-muted">
+                            <h6 class="my-0" style="font-weight:bold;">Sub Total</h6>
+                        </span>
+                    </li>
+                    @foreach (var item in ViewBag.checkout)
+                    {
+
+
+                        <li class="list-group-item d-flex justify-content-between lh-condensed">
+                            <p class="card-text">@item.Products.ProductName</p>
+
+                            <p class="card-text">@item.Products.ProductPrice</p>
+                            <p class="card-text">@item.Quantity</p>
+                            <strong>@(item.Products.ProductPrice * item.Quantity)</strong>
+                        </li>
+
+                    }
+
+                </ul>
+                <ul class="list-group mb-3">
+                    <li class="list-group-item d-flex justify-content-between">
+                        <b><span>Total </span></b>
+                        <strong>@ViewBag.total</strong>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    @*<div class="container" >
+            <div class="col-lg-3">
+                <div class="order_box">
+                    <h2>Your Orders</h2>
+                    @foreach (var item in ViewBag.checkout)
+                    {
+                        <ul class="list">
+
+                            <li><a>Product<span>Total</span><span>Quantity</span> </a></li>
+                            <li>@item.Products.ProductName <span class="middle">@item.Quantity</span> <span class="last">@(item.Products.ProductPrice * item.Quantity)</span></li>
+                        </ul>
+                    }
+
+
+                </div>
+            </div>
+        </div>*@
+
+</section>
