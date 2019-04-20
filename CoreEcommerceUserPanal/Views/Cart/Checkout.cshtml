@@ -71,12 +71,12 @@
             </p>
             <form class="row contact_form" method="post" asp-controller="Customers" asp-action="Login" id="contactForm" novalidate="novalidate">
                 <div class="col-md-6 form-group p_star">
-                    <input type="text" class="form-control" id="name" name="name">
-                    <span class="placeholder" data-placeholder="Username or Email"></span>
+                    <input type="text" class="form-control" id="name" name="name" placeholder="Enter username">
+
                 </div>
                 <div class="col-md-6 form-group p_star">
-                    <input type="password" class="form-control" id="password" name="password">
-                    <span class="placeholder" data-placeholder="Password"></span>
+                    <input type="password" class="form-control" id="password" name="password" placeholder="Enter password">
+
                 </div>
                 <div class="col-md-12 form-group">
                     <button type="submit" value="submit" class="primary-btn" asp-action="Login" asp-controller="Customers">login</button>
@@ -88,7 +88,7 @@
             <div class="row">
                 <div class="col-lg-8">
                     <h3>Billing Details</h3>
-                    <form class="row contact_form" name="myform" novalidate="novalidate">
+                    <form class="row contact_form" name="myform" method="post" novalidate="novalidate">
                         <div class="col-md-6 form-group p_star">
                             <input asp-for="FirstName" type="text" class="form-control" id="firstName" placeholder="" value="@ViewBag.cus.FirstName" required>
                             <div class="invalid-feedback">
@@ -135,21 +135,20 @@
                         <br />
                         <br />
                         <div class="col-md-12 form-group p_star">
-                            <input asp-for="Address" type="text" class="form-control" id="permanent_address" placeholder="1234 Main St" required>
+                            <input asp-for="Address" type="text" class="form-control" id="permanent_address" placeholder="Enter Address" required>
                         </div>
                         <div class="col-md-12 form-group p_star">
-                            <input asp-for="PhoneNo" type="number" class="form-control" id="permanent_phone" placeholder="Phone Number" required>
+                            <input asp-for="PhoneNo" type="number" class="form-control" id="permanent_phone" placeholder=" Enter Phone Number" required>
                         </div>
                         <div class="col-md-12 form-group p_star">
-                            <input asp-for="Country" type="text" class="form-control" id="permanent_country" placeholder="Country" required>
+                            <input asp-for="Country" type="text" class="form-control" id="permanent_country" placeholder="Enter Country" required>
                         </div>
                         <div class="col-md-12 form-group p_star">
-                            <input asp-for="State" type="text" class="form-control" id="permanent_state" placeholder="State" required>
+                            <input asp-for="State" type="text" class="form-control" id="permanent_state" placeholder="Enter State" required>
                         </div>
                         <div class="col-md-12 form-group">
-                            <input asp-for="Zip" type="number" class="form-control" id="permanent_pincode" placeholder="Zip" required>
+                            <input asp-for="Zip" type="number" class="form-control" id="permanent_pincode" placeholder="Enter Zip" required>
                         </div>
-
 
                         <script src="//checkout.stripe.com/v2/checkout.js"
                                 class="stripe-button"
@@ -215,22 +214,7 @@
             </div>
         </div>
     </div>
-    @*<div class="container" >
-            <div class="col-lg-3">
-                <div class="order_box">
-                    <h2>Your Orders</h2>
-                    @foreach (var item in ViewBag.checkout)
-                    {
-                        <ul class="list">
 
-                            <li><a>Product<span>Total</span><span>Quantity</span> </a></li>
-                            <li>@item.Products.ProductName <span class="middle">@item.Quantity</span> <span class="last">@(item.Products.ProductPrice * item.Quantity)</span></li>
-                        </ul>
-                    }
-
-
-                </div>
-            </div>
-        </div>*@
 
 </section>
+<!--================End Checkout Area =================-->
