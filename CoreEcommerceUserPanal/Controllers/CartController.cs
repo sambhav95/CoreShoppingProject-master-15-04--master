@@ -282,11 +282,14 @@ namespace CoreEcommerceUserPanal.Controllers
         public IActionResult Invoice()
         {
             int customerid = int.Parse(TempData["cust"].ToString());
-           int paymentid=int.Parse(TempData["pay"].ToString());
+            int paymentid=int.Parse(TempData["pay"].ToString());
+            int ordrid = int.Parse(TempData["orderId"].ToString());
             Customers customer = context.Customers.Where(x => x.CustomerId == customerid).SingleOrDefault();
             ViewBag.Customers = customer;
             Payments payment=context.Payments.Where(x=>x.PaymentId==paymentid).SingleOrDefault();
             ViewBag.Paymnt = payment;
+            Orders ord= context.Orders.Where(x => x.OrderId == ordrid).SingleOrDefault();
+            ViewBag.Od= ord;
             var cart = SessionHelper.GetObjectFromJson<List<Item>>(HttpContext.Session, "cart");
             ViewBag.cart = cart;
             foreach(var Item in cart)

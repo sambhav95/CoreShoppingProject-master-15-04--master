@@ -25,10 +25,10 @@
                 <div class="details_item">
                     <h4>Order Info</h4>
                     <ul class="list">
-                        <li><span>Order number:</span> :@ViewBag.order,O </li>
+                        <li><span>Order number:</span> :@ViewBag.Od.OrderId </li>
                         <li><span>PaymentId</span> :@ViewBag.Paymnt.PaymentId</li>
                         <li>
-                            <span>Date</span> :
+                            <span>Date</span> :@ViewBag.Od.OrderDate
                             <script>
                                 document.getElementById("date").innerHTML = Date();
                             </script>
@@ -40,13 +40,12 @@
             </div>
             <div class="col-lg-4">
                 <div class="details_item">
-                    <h4>Billing Address</h4>
+                    <h4>Billing </h4>
                     <ul class="list">
                         <li><span>Name </span> :   @ViewBag.Customers.FirstName&nbsp;&nbsp;@ViewBag.Customers.LastName<br></li>
                         <li><span>Street</span> : @ViewBag.Customers.Address</li>
-                        <li><span>State</span> :  @ViewBag.Customers.State</li>
-                        <li><span>Country</span> : @ViewBag.Customers.Country</li>
-                        <li><span>Zip </span> :@ViewBag.Customers.Zip</li>
+                        <li><span>State</span> :  @ViewBag.Customers.PhoneNo</li>
+                       
                         
                     </ul>
 
