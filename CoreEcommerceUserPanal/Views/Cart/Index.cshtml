@@ -1,4 +1,6 @@
-﻿@{
+﻿@using Microsoft.AspNetCore.Http;
+
+@{
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_UserLayout.cshtml";
 }
@@ -22,6 +24,7 @@
                 <table class="table">
                     <thead>
                         <tr>
+                          
                             <th scope="col">Product</th>
                             <th scope="col">Price</th>
                             <th scope="col">Quantity</th>
@@ -32,15 +35,18 @@
                         @foreach (var item in ViewBag.cart)
                         {
                         <tr>
+                            @*<a asp-controller="cart" asp-action="Remove" asp-route-id="@item.Products.ProductId">Remove</a>*@
                             <td>
-                                @*<a asp-controller="cart" asp-action="Remove" asp-route-id="@item.Products.ProductId">Remove</a>*@
+                               
                                 <div class="media">
-                                    <div class="d-flex">
-                                        <img src="@item.Products.ProductImage" width="100" height="100" alt="">
-                                    </div>
                                     <div class="media-body">
                                         <p>@item.Products.ProductName</p>
                                     </div>
+                                    <div class="d-flex">
+
+                                        <img src="@item.Products.ProductImage" width="100" height="100" alt="">
+                                    </div>
+
                                 </div>
                             </td>
                             <td>
@@ -91,9 +97,9 @@
                                 <div class="checkout_btn_inner d-flex align-items-center">
                                     <a asp-controller="Home" asp-action="Index" class="gray_btn">Continue Shopping</a>
                                     @*<a class="primary-btn" href="#">Proceed to checkout</a>*@
-                                    @if (ViewBag.i == 0)
+                                    @if (Context.Session.GetString("logout") == null)
                                     {
-                                        <a class="primary-btn" asp-controller="Customers" asp-action="Login1">Proceed to Checkout</a>
+                                        <a class="primary-btn" asp-controller="Customers" asp-action="Login">Proceed to Checkout</a>
                                     }
                                     else
                                     {

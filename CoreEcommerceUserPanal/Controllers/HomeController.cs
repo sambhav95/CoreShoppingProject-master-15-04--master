@@ -98,15 +98,19 @@ namespace CoreEcommerceUserPanal.Controllers
         [HttpGet]
         public ViewResult Feedback()
         {
-            ViewBag.Feed = new SelectList(_context.Customers, "CustomerId", "UserName");
-            return View();
+            Feedbacks cus1 = SessionHelper.GetObjectFromJson<Feedbacks>(HttpContext.Session, "cust");
+            Customers c = SessionHelper.GetObjectFromJson<Customers>(HttpContext.Session, "cust");
+            ViewBag.cusname = c.UserName;
+            return View(cus1);
         }
         [HttpPost]
         public ActionResult Feedback(Feedbacks fed)
         {
+            Customers c = SessionHelper.GetObjectFromJson<Customers>(HttpContext.Session, "cust");
+
+            fed.CustomerId = c.CustomerId;
             _context.Feedbacks.Add(fed);
             _context.SaveChanges();
-
             return RedirectToAction("Index", "Home");
         }
         public ActionResult HomePage()

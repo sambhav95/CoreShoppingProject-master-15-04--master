@@ -123,6 +123,8 @@ namespace CoreEcommerceUserPanal.Controllers
         {
             HttpContext.Session.Remove("uname");
             HttpContext.Session.Remove("logout");
+            HttpContext.Session.Remove("cartitem");
+            HttpContext.Session.Remove("cart");
             return RedirectToAction("Index", "Home");
         }
         public IActionResult custEdit()

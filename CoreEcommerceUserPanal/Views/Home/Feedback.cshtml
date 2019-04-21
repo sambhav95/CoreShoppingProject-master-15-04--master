@@ -6,59 +6,113 @@
 
 
 
-<h2>Feedback</h2>
-<link rel="icon" type="image/png" href="images/icons/favicon.ico" />
-<link rel="stylesheet" type="text/css" href="~/css/util.css">
-<link rel="stylesheet" type="text/css" href="~/css/main.css">
-<div class="contact1">
-    <div class="container-contact1">
-        <div class="contact1-pic js-tilt" data-tilt>
-            <img src="~/images/img-01.png" alt="IMG">
-        </div>
-        <form class="contact1-form validate-form" asp-action="Feedback" asp-controller="Home">
-            <span class="contact1-form-title">
-                Get in touch
-            </span>
-            <div class="wrap-input1 validate-input" data-validate="Valid email is required: ex@abc.xyz">
-                <label asp-for="EmailId">EmailId</label>
-                <input class="input1" asp-for="EmailId" type="email" id="email" placeholder="Email">
-                <span class="shadow-input1"></span>
-            </div>
-            <div class="wrap-input1 validate-input" data-validate="Phone No is required">
-                <label asp-for="PhoneNo">Phone No</label>
-                <input class="input1" asp-for="PhoneNo" type="number" id="phone" placeholder="Phone">
-                <span class="shadow-input1"></span>
-            </div>
-            <div class="wrap-input1 validate-input" data-validate="Message is required">
-                <label asp-for="Comment">Comment</label>
-                <textarea class="input1" asp-for="Comment" id="comment" placeholder="Message"></textarea>
-                <span class="shadow-input1"></span>
-            </div>
-            <div class="wrap-input1 validate-input" data-validate="Phone No is required">
-                <label asp-for="CustomerId">Customer Id</label>
+<style>
 
-                <select class="input1" asp-for="CustomerId" asp-items="ViewBag.feed"></select>
-            </div>  <br />
-            <div class="container-contact1-form-btn">
-                <button class="contact1-form-btn">
-                    <span>
-                        Send FeedBack
-                        <i class="fa fa-long-arrow-right" aria-hidden="true"></i>
-                    </span>
-                </button>
+
+
+    .im1 {
+        margin-left: 300px;
+        margin-top: -400px;
+    }
+</style>
+<!-- Start Banner Area -->
+<section class="banner-area organic-breadcrumb">
+    <div class="container">
+        <div class="breadcrumb-banner d-flex flex-wrap align-items-center justify-content-end">
+            <div class="col-first">
+                <h1>Feedback</h1>
             </div>
-        </form>
+        </div>
+    </div>
+</section>
+<div class="container">
+    <div class="row">
+        <div class="col-xl-3 col-lg-4 col-md-5">
+            <div class="sidebar-categories">
+                <br /><br />
+                <ul class="main-categories">
+                    <li class="main-nav-list">
+                        <a data-toggle="collapse" href="#fruitsVegetable" aria-expanded="false" aria-controls="fruitsVegetable">
+                            <span class="lnr lnr-arrow-right"></span> <a class="nav-link" asp-controller="customers" asp-action="Details">My Profile</a>
+                        </a>
+                    </li>
+                    <li class="main-nav-list">
+                        <a data-toggle="collapse" href="#meatFish" aria-expanded="false" aria-controls="meatFish">
+                            <span class="lnr lnr-arrow-right"></span> <a class="nav-link" asp-controller="customers" asp-action="OrderHistory">My Orders</a>
+                        </a>
+                    </li>
+                    <li class="main-nav-list">
+                        <a data-toggle="collapse" href="#cooking" aria-expanded="false" aria-controls="cooking">
+                            <span class="lnr lnr-arrow-right"></span> <a class="nav-link" asp-controller="customers" asp-action="custEdit">Edit Profile</a>
+                        </a>
+                    </li>
+                    <li class="main-nav-list">
+                        <a data-toggle="collapse" href="#beverages" aria-expanded="false" aria-controls="beverages">
+                            <span class="lnr lnr-arrow-right"></span><a class="nav-link" asp-controller="customers" asp-action="password">Reset Password</a>
+                        </a>
+                    </li>
+                    <li class="main-nav-list">
+                        <a data-toggle="collapse" href="#homeClean" aria-expanded="false" aria-controls="homeClean">
+                            <span class="lnr lnr-arrow-right"></span> <a class="nav-link" asp-controller="Home" asp-action="Feedback">Feedback</a>
+                        </a>
+                    </li>
+                    <br />
+                    <br />
+                </ul>
+            </div>
+        </div>
     </div>
 </div>
-<script>$('.js-tilt').tilt({
-			scale: 1.1
-		})</script>
-<!-- Global site tag (gtag.js) - Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-23581568-13"></script>
-<script>window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+<br /><br />
+<body>
+    <form class="contact1-form validate-form" asp-action="Feedback" asp-controller="Customers">
+        <div class="col-md-6 im1">
+            <div class="form-group">
+                <label>Username</label>
+                <input type="text" class="form-control" asp-items="ViewBag.feed" value="@ViewBag.cusname" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter your name'">
+            </div>
+            <div class="form-group">
+                <label asp-for="EmailId">Email Id</label>
+                <input type="email" asp-for="EmailId" class="form-control" id="email" placeholder="Enter email address" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter email address'">
+            </div>
+            <div class="form-group">
+                <label asp-for="PhoneNo">Phone No</label>
+                <input class="form-control" asp-for="PhoneNo" type="text" id="phone" placeholder="Phone" required>
+            </div>
 
-  gtag('config', 'UA-23581568-13');</script>
-<!--===============================================================================================-->
-<script src="~/js/main.js"></script>
+            <div class="form-group">
+                <label asp-for="Comment">Message</label>
+                <textarea class="form-control" asp-for="Comment" id="message" rows="1" placeholder="Enter Message" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter Message'" required></textarea>
+            </div>
+
+            <div class="col-md-12 text-left">
+
+                <button type="submit" value="submit" class="primary-btn" onclick="myFunction()">Send </button>
+            </div>
+        </div>
+
+    </form>
+    <br />
+    <script>
+        function myFunction() {
+            alert("Feedback Successfully Submitted !!!");
+        }
+    </script>
+
+    <script>
+        $('.js-tilt').tilt({
+            scale: 1.1
+        })
+    </script>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-23581568-13"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'UA-23581568-13');
+    </script>
+    <!--===============================================================================================-->
+    <script src="~/js/main.js"></script>
+</body>

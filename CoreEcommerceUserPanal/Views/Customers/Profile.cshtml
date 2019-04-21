@@ -3,50 +3,130 @@
     ViewData["Title"] = "Profile";
     Layout = "~/Views/Shared/_UserLayout.cshtml";
 }
-<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-<link href="~/css/css1/UserProfile.css" rel="stylesheet" />
-<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<!------ Include the above in your HEAD tag ---------->
-<h5>
-    User Profile
+<style>
 
-</h5>
+
+
+    .im1 {
+        margin-left: 300px;
+        margin-top: -380px;
+    }
+</style>
+<section class="banner-area organic-breadcrumb">
+    <div class="container">
+        <div class="breadcrumb-banner d-flex flex-wrap align-items-center justify-content-end">
+            <div class="col-first">
+                <h1> My Dashboard</h1>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- End Banner Area -->
 <div class="container">
     <div class="row">
-        <div class="col-md-6 img">
-       
-            <img src="~/images/profile.png" class="img-rounded">
-        </div>
-        <div class="col-md-6 details">
-        
-               
-              
-
-                   
-         
-         
-
-            <p>
-
-                Name:  @Html.DisplayFor(Model => Model.FirstName)
-                @Html.DisplayFor(Model => Model.LastName)<br>
-              
-                EmailId: @Html.DisplayFor(Model => Model.EmailId)<br>
-              
-                Password: @Html.DisplayFor(Model => Model.Password)<br>
-                UserName: @Html.DisplayFor(Model => Model.UserName) <br>
-                Address: @Html.DisplayFor(Model => Model.Address)<br>
-                PhoneNo: @Html.DisplayFor(Model => Model.PhoneNo)<br>
-                Country: @Html.DisplayFor(Model => Model.Country)<br>
-                State: @Html.DisplayFor(Model => Model.State)<br>
-                Zip: @Html.DisplayFor(Model => Model.Zip)<br>
-
-            </p>
-
+        <div class="col-xl-3 col-lg-4 col-md-5">
+            <div class="sidebar-categories">
+                <br /><br />
+                <ul class="main-categories">
+                    <li class="main-nav-list">
+                        <a data-toggle="collapse" href="#fruitsVegetable" aria-expanded="false" aria-controls="fruitsVegetable">
+                            <span class="lnr lnr-arrow-right"></span> <a class="nav-link" asp-controller="customers" asp-action="Profile">My Profile</a>
+                        </a>
+                    </li>
+                    <li class="main-nav-list">
+                        <a data-toggle="collapse" href="#meatFish" aria-expanded="false" aria-controls="meatFish">
+                            <span class="lnr lnr-arrow-right"></span> <a class="nav-link" asp-controller="customers" asp-action="OrderHistory">My Orders</a>
+                        </a>
+                    </li>
+                    <li class="main-nav-list">
+                        <a data-toggle="collapse" href="#cooking" aria-expanded="false" aria-controls="cooking">
+                            <span class="lnr lnr-arrow-right"></span> <a class="nav-link" asp-controller="customers" asp-action="custEdit">Edit Profile</a>
+                        </a>
+                    </li>
+                    <li class="main-nav-list">
+                        <a data-toggle="collapse" href="#beverages" aria-expanded="false" aria-controls="beverages">
+                            <span class="lnr lnr-arrow-right"></span><a class="nav-link" asp-controller="customers" asp-action="password">Reset Password</a>
+                        </a>
+                    </li>
+                    <li class="main-nav-list">
+                        <a data-toggle="collapse" href="#homeClean" aria-expanded="false" aria-controls="homeClean">
+                            <span class="lnr lnr-arrow-right"></span> <a class="nav-link" asp-controller="Home" asp-action="Feedback">Feedback</a>
+                        </a>
+                    </li>
+                    <br />
+                    <br />
+                </ul>
+            </div>
         </div>
     </div>
 </div>
-<center>
-    <a asp-controller="Home" asp-action="Index"><button type="button" class="btn btn-success btn1">Back to List</button></a>
-</center>
+
+<div class="col-xl-11 col-lg-10 col-md-12">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12-details im1">
+                <form class="contact1-form validate-form">
+                    <div class="form-group row">
+                        <input type="hidden" asp-for="CustomerId" />
+                        <br />
+                        <label class="col-sm-2 col-form-label" asp-for="FirstName">First Name </label>
+                        <div class="col-sm-10">
+                            <input class="form-control" asp-for="FirstName" />
+                        </div>
+                        <br /><br />
+                        <label for="text" class="col-sm-2 col-form-label" asp-for="LastName">LastName</label>
+                        <div class="col-sm-10">
+                            <input class="form-control" asp-for="LastName" />
+                        </div>
+                        <br />
+                        <br />
+                        <label for="text" class="col-sm-2 col-form-label" asp-for="UserName">UserName</label>
+                        <div class="col-sm-10">
+                            <input class="form-control" asp-for="UserName" />
+                        </div>
+                        <br />
+                        <br />
+                        <label for="text" class="col-sm-2 col-form-label" asp-for="PhoneNo">Phone No</label>
+                        <div class="col-sm-10">
+                            <input class="form-control" asp-for="PhoneNo" />
+                        </div>
+                        <br /><br />
+                        <label for="text" class="col-sm-2 col-form-label" asp-for="EmailId">Email Id</label>
+                        <div class="col-sm-10">
+                            <input class="form-control" asp-for="EmailId" />
+                        </div>
+                        <br /><br />
+                        <label for="text" class="col-sm-2 col-form-label" asp-for="Password">Password</label>
+                        <div class="col-sm-10">
+                            <input class="form-control" asp-for="Password" />
+                        </div> <br /><br />
+                        <label for="text" class="col-sm-2 col-form-label" asp-for="Gender">Gender</label>
+                        <div class="col-sm-10">
+                            <input class="form-control" asp-for="Gender" />
+                        </div>
+                        <br /><br />
+                        <label for="text" class="col-sm-2 col-form-label" asp-for="Address">Address</label>
+                        <div class="col-sm-10">
+                            <input class="form-control" asp-for="Address" />
+                        </div>
+                        <br /><br />
+                        <label for="text" class="col-sm-2 col-form-label" asp-for="Country">Country</label>
+                        <div class="col-sm-10">
+                            <input class="form-control" asp-for="Country" />
+                        </div>
+                        <br /><br />
+                        <label for="text" class="col-sm-2 col-form-label" asp-for="State">State</label>
+                        <div class="col-sm-10">
+                            <input class="form-control" asp-for="State" />
+                        </div>
+                        <br /><br />
+                        <label for="text" class="col-sm-2 col-form-label" asp-for="Zip">Zip</label>
+                        <div class="col-sm-10">
+                            <input class="form-control" asp-for="Zip" />
+                        </div>  <br /><br />
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
