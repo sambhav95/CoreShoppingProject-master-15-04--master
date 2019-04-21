@@ -105,7 +105,7 @@ namespace CoreEcommerceUserPanal.Controllers
                     HttpContext.Session.SetString("uname", username);
                     SessionHelper.SetObjectAsJson(HttpContext.Session, "cust", user);
                     HttpContext.Session.SetString("logout", userName);
-                    return RedirectToAction("Index", "Home", new
+                    return RedirectToAction("Checkout", "Cart", new
                     {
                         @id = custId
                     });
