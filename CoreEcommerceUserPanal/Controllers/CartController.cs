@@ -256,8 +256,8 @@ namespace CoreEcommerceUserPanal.Controllers
                 context.Add<Payments>(payment);
                 context.Payments.Add(payment);
                 context.SaveChanges();
-
-                return RedirectToAction("Invoice");
+            TempData["pay"] = payment.PaymentId;
+            return RedirectToAction("Invoice");
             
            // return RedirectToAction("Invoice","Cart");
             //}
@@ -282,11 +282,11 @@ namespace CoreEcommerceUserPanal.Controllers
         public IActionResult Invoice()
         {
             int customerid = int.Parse(TempData["cust"].ToString());
-           // int paymentid=int.Parse(TempData["pay"].ToString());
+           int paymentid=int.Parse(TempData["pay"].ToString());
             Customers customer = context.Customers.Where(x => x.CustomerId == customerid).SingleOrDefault();
             ViewBag.Customers = customer;
-            //Payments payment=_context.Payments.Where(x=>x.PaymentId==paymentid).SingleOrDefault();
-            //ViewBag.Paymnt = payment;
+            Payments payment=context.Payments.Where(x=>x.PaymentId==paymentid).SingleOrDefault();
+            ViewBag.Paymnt = payment;
             var cart = SessionHelper.GetObjectFromJson<List<Item>>(HttpContext.Session, "cart");
             ViewBag.cart = cart;
             foreach(var Item in cart)

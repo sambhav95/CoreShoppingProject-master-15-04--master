@@ -1,8 +1,11 @@
 ﻿@{
     ViewData["Title"] = "Invoice";
-    Layout = null;
+    Layout = "~/Views/Shared/_UserLayout.cshtml";
 }
 
+<br />
+<br /><br /><br />
+<!-- Start Banner Area -->
 <section class="banner-area organic-breadcrumb">
     <div class="container">
         <div class="breadcrumb-banner d-flex flex-wrap align-items-center justify-content-end">
@@ -22,10 +25,13 @@
                 <div class="details_item">
                     <h4>Order Info</h4>
                     <ul class="list">
-                        <li><span>Order number</span> : </li>
+                        <li><span>Order number:</span> :@ViewBag.order,O </li>
+                        <li><span>PaymentId</span> :@ViewBag.Paymnt.PaymentId</li>
                         <li>
                             <span>Date</span> :
-                            <script>document.getElementById("date").innerHTML = Date();</script>
+                            <script>
+                                document.getElementById("date").innerHTML = Date();
+                            </script>
                         </li>
                         <li><span>Total</span> : @ViewBag.total</li>
 
@@ -41,6 +47,7 @@
                         <li><span>State</span> :  @ViewBag.Customers.State</li>
                         <li><span>Country</span> : @ViewBag.Customers.Country</li>
                         <li><span>Zip </span> :@ViewBag.Customers.Zip</li>
+                        
                     </ul>
 
                 </div>
