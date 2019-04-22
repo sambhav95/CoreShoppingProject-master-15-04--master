@@ -27,13 +27,13 @@ namespace CoreEcommerceUserPanal.Controllers
         {
 
             var cart = SessionHelper.GetObjectFromJson<List<Item>>(HttpContext.Session, "cart");
-            //foreach(var it in cart)
-            //{
-            //    if(it.Quantity==it.Products.ProductQty)
-            //    {
-            //        ViewBag.j = it.Products.ProductId;
-            //    }
-            //}
+            foreach (var it in cart)
+            {
+                if (it.Quantity == it.Products.ProductQty)
+                {
+                    ViewBag.j = it.Products.ProductId;
+                }
+            }
             int i = 0;
             if (cart != null)
             {
@@ -346,8 +346,25 @@ namespace CoreEcommerceUserPanal.Controllers
             SessionHelper.SetObjectAsJson(HttpContext.Session, "cart", cart);
             return RedirectToAction("Index");
         }
+        [Route("search")]
+        [HttpGet]
+        public IActionResult Search(string search)
 
-      
+        {
+
+            if (search == null)
+            {
+                return RedirectToAction("Index", "Home");
+            }
+
+            HttpContext.Session.SetString("Search", search.ToString());
+
+            ViewBag.prodt = context.Products.Where(x => x.ProductName == search || x.ProductDescription == search || search == null).ToList();
+            return View();
+
+
+        }
+
 
     }
 }

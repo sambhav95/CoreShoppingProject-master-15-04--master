@@ -54,8 +54,14 @@
                                 </td>
 
                                 <td>
-                                    <a class="btn btn-default" asp-controller="cart" asp-action="Minus" asp-route-id="@item.Products.ProductId">-</a>@item.Quantity
-                                    <a class="btn btn-default" asp-controller="cart" asp-action="Plus" asp-route-id="@item.Products.ProductId">+</a>
+                                    @if (ViewBag.j == item.Products.ProductId)
+                                    {
+             <a class="btn btn-default" asp-controller="cart" asp-action="Minus" asp-route-id="@item.Products.ProductId">-</a>@item.Quantity
+                                        <a onclick="alert('Product is Out Of Stock')">+</a>
+                                    }
+                                    else
+                                    {
+                                <a class="btn btn-default" asp-controller="cart" asp-action="Minus" asp-route-id="@item.Products.ProductId">-</a>@item.Quantity<a class="btn btn-default" asp-controller="cart" asp-action="Plus" asp-route-id="@item.Products.ProductId">+</a>}
                                 </td>
 
                                 <td>
