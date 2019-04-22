@@ -27,13 +27,13 @@ namespace CoreEcommerceUserPanal.Controllers
         {
 
             var cart = SessionHelper.GetObjectFromJson<List<Item>>(HttpContext.Session, "cart");
-            foreach(var it in cart)
-            {
-                if(it.Quantity==it.Products.ProductQty)
-                {
-                    ViewBag.j = it.Products.ProductId;
-                }
-            }
+            //foreach(var it in cart)
+            //{
+            //    if(it.Quantity==it.Products.ProductQty)
+            //    {
+            //        ViewBag.j = it.Products.ProductId;
+            //    }
+            //}
             int i = 0;
             if (cart != null)
             {

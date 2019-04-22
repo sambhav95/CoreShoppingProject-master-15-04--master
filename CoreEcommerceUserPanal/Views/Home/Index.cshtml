@@ -187,13 +187,14 @@
                                     @*<button type="button" class="btn btn-sm btn-outline-secondary">Add to Cart</button>*@
                                     @if (item.ProductQty < 1)
                                     {
-                                        <a class="btn btn-sm btn-outline-secondary"> Add to Cart </a>@*&nbsp; &nbsp; &nbsp;*@
+                                        <a class="btn btn-sm btn-outline-secondary"> Add to Cart </a>@:&nbsp;&nbsp;&nbsp;
 
                                         <a asp-controller="Cart" asp-action="OutofStock" asp-route-id="@item.ProductId" class="btn btn-sm btn-outline-secondary"> View Details</a>}
 
-                                    else{<a asp-controller="Cart" asp-action="Buy" asp-route-id="@item.ProductId" onclick="alert('Added To cart')" class="btn btn-sm btn-outline-secondary"> Add to Cart </a> @*&nbsp; &nbsp; &nbsp;*@
+                                    else
+                                    {<a asp-controller="Cart" asp-action="Buy" asp-route-id="@item.ProductId" onclick="alert('Added To cart')" class="btn btn-sm btn-outline-secondary"> Add to Cart </a> @:&nbsp;&nbsp;&nbsp;
 
-                                    <a asp-controller="Cart" asp-action="details" asp-route-id="@item.ProductId" class="btn btn-sm btn-outline-secondary"> View Details</a>}
+                                        <a asp-controller="Cart" asp-action="details" asp-route-id="@item.ProductId" class="btn btn-sm btn-outline-secondary"> View Details</a>}
                                 </div>
                                 @if (item.ProductQty < 1)
                                 {<font size="5" color="red">OutOfStock</font>}

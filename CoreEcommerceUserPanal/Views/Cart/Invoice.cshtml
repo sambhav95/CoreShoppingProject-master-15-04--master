@@ -29,9 +29,7 @@
                         <li><span>PaymentId</span> :@ViewBag.Paymnt.PaymentId</li>
                         <li>
                             <span>Date</span> :@ViewBag.Od.OrderDate
-                            <script>
-                                document.getElementById("date").innerHTML = Date();
-                            </script>
+                        
                         </li>
                         <li><span>Total</span> : @ViewBag.total</li>
 
@@ -43,8 +41,8 @@
                     <h4>Billing </h4>
                     <ul class="list">
                         <li><span>Name </span> :   @ViewBag.Customers.FirstName&nbsp;&nbsp;@ViewBag.Customers.LastName<br></li>
-                        <li><span>Street</span> : @ViewBag.Customers.Address</li>
-                        <li><span>State</span> :  @ViewBag.Customers.PhoneNo</li>
+                        <li><span>Address</span> : @ViewBag.Customers.Address</li>
+                        <li><span>PhoneNo</span> :  @ViewBag.Customers.PhoneNo</li>
                        
                         
                     </ul>

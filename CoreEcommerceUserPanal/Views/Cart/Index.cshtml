@@ -1,5 +1,4 @@
 ﻿@using Microsoft.AspNetCore.Http;
-
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_UserLayout.cshtml";
@@ -12,11 +11,12 @@
         <div class="breadcrumb-banner d-flex flex-wrap align-items-center justify-content-end">
             <div class="col-first">
                 <h1>Shopping Cart</h1>
-
             </div>
         </div>
     </div>
 </section>
+<!-- End Banner Area -->
+<!--================Cart Area =================-->
 <section class="cart_area">
     <div class="container">
         <div class="cart_inner">
@@ -24,8 +24,9 @@
                 <table class="table">
                     <thead>
                         <tr>
-                          
+                            <th scope="col"></th>
                             <th scope="col">Product</th>
+                            <th scope="col">Product Name</th>
                             <th scope="col">Price</th>
                             <th scope="col">Quantity</th>
                             <th scope="col">Total</th>
@@ -34,76 +35,61 @@
                     <tbody>
                         @foreach (var item in ViewBag.cart)
                         {
-                        <tr>
-                            @*<a asp-controller="cart" asp-action="Remove" asp-route-id="@item.Products.ProductId">Remove</a>*@
-                            <td>
-                               
-                                <div class="media">
-                                    <div class="media-body">
-                                        <p>@item.Products.ProductName</p>
-                                    </div>
-                                    <div class="d-flex">
-
-                                        <img src="@item.Products.ProductImage" width="100" height="100" alt="">
-                                    </div>
-
-                                </div>
-                            </td>
-                            <td>
-                                <h5>@item.Products.ProductPrice</h5>
-                            </td>
-                            @if (ViewBag.j == item.Products.ProductId)
-                            {
+                            <tr>
                                 <td>
-                                    <div class="product_count">
-                                        <a class="btn btn-default" asp-controller="cart" asp-action="Minus" asp-route-id="@item.Products.ProductId">-</a>@item.Quantity
-                                        <a class="btn btn-default" onclick="alert('Product is Out Of Stock')">+</a>
-                                    </div>
-                                </td> }
-                            else
-                            {
-                                <td>
-                                    <div class="product_count">
-                                        <a class="btn btn-default" asp-controller="cart" asp-action="Minus" asp-route-id="@item.Products.ProductId">-</a>@item.Quantity
-                                        <a class="btn btn-default" asp-controller="cart" asp-action="Plus" asp-route-id="@item.Products.ProductId">+</a>
-                                    </div>
+                                    <a asp-controller="Cart" asp-action="Remove" asp-route-id="@item.Products.ProductId">Remove</a>
                                 </td>
-                            }
+                                <td>
+                                    <div class="media">
+                                        <div class="d-flex">
+                                            <img src="@item.Products.ProductImage" width="100" height="100" alt="">
+                                        </div>
+                                    </div>
+                                <td>
+                                    <p>@item.Products.ProductName</p>
+                                </td>
 
-                            <td>
-                                <h5>@(item.Products.ProductPrice * item.Quantity)</h5>
-                            </td>
-                        </tr>
+                                <td>
+                                    <h5>@item.Products.ProductPrice</h5>
+                                </td>
+
+                                <td>
+                                    <a class="btn btn-default" asp-controller="cart" asp-action="Minus" asp-route-id="@item.Products.ProductId">-</a>@item.Quantity
+                                    <a class="btn btn-default" asp-controller="cart" asp-action="Plus" asp-route-id="@item.Products.ProductId">+</a>
+                                </td>
+
+                                <td>
+                                    <h5>@(item.Products.ProductPrice * item.Quantity)</h5>
+                                </td>
+                            </tr>
                         }
 
-
-
                         <tr>
                             <td></td>
                             <td></td>
                             <td>
+                            <td>
                                 <h5>Subtotal</h5>
-                            </td>
+                            </td></td>
                             <td>
                                 <h5>@ViewBag.total</h5>
                             </td>
                         </tr>
-
                         <tr class="out_button_area">
                             <td></td>
                             <td></td>
                             <td></td>
                             <td>
                                 <div class="checkout_btn_inner d-flex align-items-center">
-                                    <a asp-controller="Home" asp-action="Index" class="gray_btn">Continue Shopping</a>
+                                    <a asp-controller="Home" asp-action="Index" class="gray_btn">Continue Shopping</a>&nbsp;
                                     @*<a class="primary-btn" href="#">Proceed to checkout</a>*@
                                     @if (Context.Session.GetString("logout") == null)
                                     {
-                                        <a class="primary-btn" asp-controller="Customers" asp-action="Login1">Proceed to Checkout</a>
+                                        <a class="primary-btn" asp-controller="Customers" asp-action="Login">Proceed to Checkout</a>
                                     }
                                     else
                                     {
-                                        <a class="primary-btn" asp-controller="cart" asp-action="Checkout">Proceed to CheckOut</a>
+                                        <a class="primary-btn" asp-controller="Cart" asp-action="Checkout">Proceed to Checkout</a>
                                     }
                                 </div>
                             </td>
@@ -114,3 +100,4 @@
         </div>
     </div>
 </section>
+<!--================End Cart Area =================-->
